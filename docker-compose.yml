@@ -171,7 +171,7 @@ services:
             - TUNNEL_SECRET=${TRANSMISSION_TUNNEL_SECRET}
     
     transmission_cleanup:
-        image: jonoh/transmission-cleanup:v0.0.8
+        image: jonoh/transmission-cleanup:v0.0.9
         restart: always
         volumes:
             - /mnt/data/downloads:/cleanup
