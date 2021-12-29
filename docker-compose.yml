@@ -29,7 +29,7 @@ services:
         command: /compose/up.sh
 
     cloudflare_compose_up:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         volumes:
             - /mnt/data/cloudflare_compose_up:/config
@@ -55,7 +55,7 @@ services:
         restart: always
 
     cloudflare_ssh:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         network_mode: host
         volumes:
@@ -144,7 +144,7 @@ services:
             - apparmor:unconfined
 
     cloudflare_plex:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         volumes:
             - /mnt/data/cloudflare_plex:/config
@@ -199,7 +199,7 @@ services:
             - OPENVPN_PASSWORD=${VPN_PASSWORD}
 
     cloudflare_transmission:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         volumes:
             - /mnt/data/cloudflare_transmission:/config
@@ -241,7 +241,7 @@ services:
             - /mnt/data/pgadmin:/var/lib/pgadmin
 
     cloudflare_pgadmin:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         environment:
             - TZ=Pacific/Auckland
@@ -302,7 +302,7 @@ services:
         restart: always
 
     cloudflare_webtop:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         volumes:
             - /mnt/data/cloudflare_webtop:/config        
         environment:
@@ -325,7 +325,7 @@ services:
         restart: always
 
     cloudflare_yt_cast:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         volumes:
             - /mnt/data/cloudflare_yt_cast:/config
         environment:
@@ -350,7 +350,7 @@ services:
             - code
     
     cloudflare_vscode:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         volumes:
             - /mnt/data/cloudflare_vscode:/config
@@ -382,7 +382,7 @@ services:
             - vaultwarden
 
     cloudflare_vaultwarden:
-        image: jonoh/cloudflared:2021.12.1
+        image: jonoh/cloudflared:2021.12.4
         restart: always
         volumes:
             - /mnt/data/cloudflare_vaultwarden:/config
