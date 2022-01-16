@@ -225,7 +225,7 @@ services:
             - TRANSMISSION_HOST=transmission
 
     rclone_convert:
-        image: jonoh/rclone-ffmpeg-convert:v0.0.9
+        image: jonoh/rclone-ffmpeg-convert:v0.0.10
         restart: always
         volumes:
             - /mnt/data/rclone_convert:/config
