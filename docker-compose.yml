@@ -441,7 +441,7 @@ services:
             - code
 
     yt-dlp:
-        image: jauderho/yt-dlp:2021.10.22
+        image: jauderho/yt-dlp:2021.12.27
         volumes:
             - /mnt/data/downloads:/downloads
         networks:
