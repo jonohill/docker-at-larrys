@@ -18,28 +18,28 @@ services:
     # Server admin
     # ~~~~~~~~~~~~ 
 
-    compose_up:
-        image: jonoh/compose-up:v0.0.5
-        restart: always
-        environment:
-            - DOCKER_HOST=unix:///var/run/docker.sock
-        volumes:
-            - /home/ubuntu/compose:/compose
-            - /var/run/docker.sock:/var/run/docker.sock
-        command: git pull
+    # compose_up:
+    #     image: jonoh/compose-up:v0.0.5
+    #     restart: always
+    #     environment:
+    #         - DOCKER_HOST=unix:///var/run/docker.sock
+    #     volumes:
+    #         - /home/ubuntu/compose:/compose
+    #         - /var/run/docker.sock:/var/run/docker.sock
+    #     command: git pull
 
-    cloudflare_compose_up:
-        image: jonoh/cloudflared:2022.2.1
-        restart: always
-        volumes:
-            - /mnt/data/cloudflare_compose_up:/config
-        environment:
-            - TZ=Pacific/Auckland
-            - TUNNEL_URL=http://compose_up:8080
-            - ACCOUNT_ID=${CF_ACCOUNT_ID}
-            - TUNNEL_NAME=compose-up
-            - TUNNEL_ID=${COMPOSE_UP_TUNNEL_ID}
-            - TUNNEL_SECRET=${COMPOSE_UP_TUNNEL_SECRET}
+    # cloudflare_compose_up:
+    #     image: jonoh/cloudflared:2022.2.1
+    #     restart: always
+    #     volumes:
+    #         - /mnt/data/cloudflare_compose_up:/config
+    #     environment:
+    #         - TZ=Pacific/Auckland
+    #         - TUNNEL_URL=http://compose_up:8080
+    #         - ACCOUNT_ID=${CF_ACCOUNT_ID}
+    #         - TUNNEL_NAME=compose-up
+    #         - TUNNEL_ID=${COMPOSE_UP_TUNNEL_ID}
+    #         - TUNNEL_SECRET=${COMPOSE_UP_TUNNEL_SECRET}
 
     compose_forever:
         image: jonoh/compose-up:v0.0.5
@@ -295,11 +295,11 @@ services:
     # Other
     # ~~~~~
 
-    postgres:
-        image: postgres:13.6
-        volumes:
-            - /mnt/data/postgresql/13/data:/var/lib/postgresql/data
-        restart: always
+    # postgres:
+    #     image: postgres:13.6
+    #     volumes:
+    #         - /mnt/data/postgresql/13/data:/var/lib/postgresql/data
+    #     restart: always
 
     # pgadmin:
     #     image: dpage/pgadmin4:6.1
@@ -325,41 +325,41 @@ services:
     #     volumes:
     #         - /mnt/data/cloudflare_pgadmin:/config        
 
-    radio_db:
-        image: jonoh/radio_db:0.3.28
-        container_name: radio_db
-        environment:
-            - RDB_DATABASE_HOST=postgres
-            - RDB_DATABASE_NAME=radio_db
-            - RDB_DATABASE_USERNAME=radio_db
-            - RDB_DATABASE_PASSWORD=${RDB_DB_PASSWORD}
-            - RDB_SPOTIFY_CLIENT_ID=${RDB_SPOTIFY_CLIENT_ID}
-            - RDB_SPOTIFY_CLIENT_SECRET=${RDB_SPOTIFY_CLIENT_SECRET}
-            - RDB_SPOTIFY_AUTH_SEED=${RDB_SPOTIFY_AUTH_SEED}
-        volumes:
-            - /mnt/data/radio_db/config.yml:/app/config.yml
-        restart: always
+    # radio_db:
+    #     image: jonoh/radio_db:0.3.28
+    #     container_name: radio_db
+    #     environment:
+    #         - RDB_DATABASE_HOST=postgres
+    #         - RDB_DATABASE_NAME=radio_db
+    #         - RDB_DATABASE_USERNAME=radio_db
+    #         - RDB_DATABASE_PASSWORD=${RDB_DB_PASSWORD}
+    #         - RDB_SPOTIFY_CLIENT_ID=${RDB_SPOTIFY_CLIENT_ID}
+    #         - RDB_SPOTIFY_CLIENT_SECRET=${RDB_SPOTIFY_CLIENT_SECRET}
+    #         - RDB_SPOTIFY_AUTH_SEED=${RDB_SPOTIFY_AUTH_SEED}
+    #     volumes:
+    #         - /mnt/data/radio_db/config.yml:/app/config.yml
+    #     restart: always
 
-    twitterdedupe-redis:
-        image: redis:6.2.6
-        volumes:
-            - /mnt/data/twitterdedupe:/data
-        command: redis-server --appendonly yes
-        restart: always
+    # twitterdedupe-redis:
+    #     image: redis:6.2.6
+    #     volumes:
+    #         - /mnt/data/twitterdedupe:/data
+    #     command: redis-server --appendonly yes
+    #     restart: always
 
-    twitterdedupe-verge:
-        image: jonoh/twitter-dedupe:0.7.2
-        environment:
-            - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
-            - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
-            - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
-            - TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET}
-            - REDISTOGO_URL=redis://twitterdedupe-redis:6379
-            - TWITTER_SCREEN_NAME=thevergelite
-            - RETWEET=1
-            - WAIT_INTERVAL=300 # Time to wait between polls, in seconds
-            - LOG_LEVEL=WARN # Or INFO, OR DEBUG, etc.
-        restart: always
+    # twitterdedupe-verge:
+    #     image: jonoh/twitter-dedupe:0.7.2
+    #     environment:
+    #         - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
+    #         - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
+    #         - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+    #         - TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET}
+    #         - REDISTOGO_URL=redis://twitterdedupe-redis:6379
+    #         - TWITTER_SCREEN_NAME=thevergelite
+    #         - RETWEET=1
+    #         - WAIT_INTERVAL=300 # Time to wait between polls, in seconds
+    #         - LOG_LEVEL=WARN # Or INFO, OR DEBUG, etc.
+    #     restart: always
 
     # webtop:
     #     image: jonoh/nas-webtop:2022.027.450
@@ -396,29 +396,29 @@ services:
     #         - TUNNEL_SECRET=${WEBTOP_TUNNEL_SECRET}
     #     restart: always
 
-    yt_cast:
-        image: jonoh/yt-cast:0.4.9
-        container_name: yt_cast
-        volumes: 
-            - /tmp/yt_cast:/tmp
-        environment:
-            - ROCKET_ADDRESS=0.0.0.0
-            - ROCKET_BASE_URL=${YT_CAST_BASE_URL}
-            - ROCKET_CHANNEL_WHITELIST=${YT_CAST_CHANNEL_WHITELIST}
-        restart: always
+    # yt_cast:
+    #     image: jonoh/yt-cast:0.4.9
+    #     container_name: yt_cast
+    #     volumes: 
+    #         - /tmp/yt_cast:/tmp
+    #     environment:
+    #         - ROCKET_ADDRESS=0.0.0.0
+    #         - ROCKET_BASE_URL=${YT_CAST_BASE_URL}
+    #         - ROCKET_CHANNEL_WHITELIST=${YT_CAST_CHANNEL_WHITELIST}
+    #     restart: always
 
-    cloudflare_yt_cast:
-        image: jonoh/cloudflared:2022.2.1
-        volumes:
-            - /mnt/data/cloudflare_yt_cast:/config
-        environment:
-            - TZ=Pacific/Auckland
-            - TUNNEL_URL=http://yt_cast:8000
-            - ACCOUNT_ID=${CF_ACCOUNT_ID}
-            - TUNNEL_NAME=yt-cast
-            - TUNNEL_ID=${YT_CAST_TUNNEL_ID}
-            - TUNNEL_SECRET=${YT_CAST_TUNNEL_SECRET}
-        restart: always
+    # cloudflare_yt_cast:
+    #     image: jonoh/cloudflared:2022.2.1
+    #     volumes:
+    #         - /mnt/data/cloudflare_yt_cast:/config
+    #     environment:
+    #         - TZ=Pacific/Auckland
+    #         - TUNNEL_URL=http://yt_cast:8000
+    #         - ACCOUNT_ID=${CF_ACCOUNT_ID}
+    #         - TUNNEL_NAME=yt-cast
+    #         - TUNNEL_ID=${YT_CAST_TUNNEL_ID}
+    #         - TUNNEL_SECRET=${YT_CAST_TUNNEL_SECRET}
+    #     restart: always
 
     # vscode:
     #     image: jonoh/vscode:v0.0.5
