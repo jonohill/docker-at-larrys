@@ -61,7 +61,7 @@ services:
         privileged: true
         environment:
             - AUTH_KEY=${TAILSCALE_AUTH_KEY}
-        command: --hostname=larry --exit-node
+        command: --hostname=larry --advertise-exit-node
         restart: always
 
     cloudflare_ssh:
