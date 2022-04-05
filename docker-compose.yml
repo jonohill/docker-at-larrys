@@ -5,6 +5,7 @@ networks:
     code: {}
     ytdlp: {}
     vaultwarden: {}
+    filerun: {}
 
 # Images which require special regex handling for renovate
 x-images:
@@ -121,6 +122,51 @@ services:
             - AUTOHEAL_DEFAULT_STOP_TIMEOUT=60
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
+
+    filerun:
+        image: filerun/filerun:arm64v8
+        restart: always
+        environment:
+            FR_DB_HOST: filerun_db
+            FR_DB_PORT: 3306
+            FR_DB_NAME: filerun
+            FR_DB_USER: root
+            FR_DB_PASS: password
+            APACHE_RUN_USER: www-data
+            APACHE_RUN_USER_ID: 33
+            APACHE_RUN_GROUP: www-data
+            APACHE_RUN_GROUP_ID: 33
+            TZ: Pacific/Auckland
+        volumes:
+            - /mnt/data/filerun/data:/user-files
+        networks:
+            - filerun
+
+    filerun_db:
+        image: mariadb:10.1.48
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: filerun
+        volumes:
+            - /mnt/data/filerun/db:/var/lib/mysql
+        networks:
+            - filerun
+
+    filerun_cloudflare:
+        image: jonoh/cloudflared:2022.2.1
+        restart: always
+        volumes:
+            - /mnt/data/filerun/cloudflare:/config
+        environment:
+            - TZ=Pacific/Auckland
+            - TUNNEL_URL=http://filerun:80
+            - ACCOUNT_ID=${CF_ACCOUNT_ID}
+            - TUNNEL_NAME=files
+            - TUNNEL_ID=${FILERUN_TUNNEL_ID}
+            - TUNNEL_SECRET=${FILERUN_TUNNEL_SECRET}
+        networks:
+            - filerun
 
     # ~~~~~
     # Media
