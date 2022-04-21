@@ -289,7 +289,7 @@ services:
     # ~~
 
     vpn_tvheadend:
-        image: qmcgaw/gluetun:v3.27.0
+        image: qmcgaw/gluetun:v3.28.2
         container_name: vpn_tvheadend
         restart: always
         cap_add:
