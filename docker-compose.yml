@@ -408,7 +408,7 @@ services:
         restart: always
 
     webtop:
-        image: jonoh/nas-webtop:2022.081.740
+        image: jonoh/nas-webtop:2022.126.336
         environment:
             - PUID=1000
             - PGID=1000
