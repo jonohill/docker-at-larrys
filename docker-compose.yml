@@ -467,7 +467,7 @@ services:
         restart: always
 
     vscode:
-        image: jonoh/vscode:v0.0.5
+        image: jonoh/vscode:v0.0.10
         restart: always
         volumes:
             - /mnt/data:/mnt/data
