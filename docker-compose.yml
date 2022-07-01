@@ -394,7 +394,7 @@ services:
         restart: always
 
     twitterdedupe-verge:
-        image: jonoh/twitter-dedupe:0.7.2
+        image: jonoh/twitter-dedupe:0.7.3
         environment:
             - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
             - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
