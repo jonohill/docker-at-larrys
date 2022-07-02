@@ -563,11 +563,11 @@ services:
             - gh_runner
         entrypoint: ["sh", "-c"]
         command: [
-            echo "$ENV_FILE" >.env;
+            echo "$$ENV_FILE" >.env;
             docker run
                 --runtime sysbox-runc
                 --name=gh-runner-$(date +%s)
                 --rm
                 --env-file=.env
-                "$IMAGE"
+                "$$IMAGE"
         ]
