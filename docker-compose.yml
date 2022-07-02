@@ -6,12 +6,16 @@ networks:
     ytdlp: {}
     vaultwarden: {}
     filerun: {}
+    gh_runner: {}
 
 # Images which require special regex handling for renovate
 x-images:
     # Hardcodes version 3 because only 3 version parts are supported
     # renovate: versioning=regex:^3\.(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)-ls\d+$
     - &SONARR_IMAGE linuxserver/sonarr:3.0.6.1265-ls111
+    # renovate: versioning=semver
+    - &GH_RUNNER_IMAGE ghcr.io/jonohill/gh-runner:v3.4.5
+
 
 services:
 
@@ -208,6 +212,28 @@ services:
             - apparmor:unconfined
         healthcheck:
             start_period: 120s
+
+    # plex_dvr:
+    #     image: ghcr.io/jonohill/docker-nas-plex-dvr:2022.170.539
+    #     restart: always
+    #     labels:
+    #         - autoheal=true
+    #     environment:
+    #         - TZ=Pacific/Auckland
+    #         - HOSTNAME=dvr
+    #         - PLEX_CLAIM=${PLEX_CLAIM}
+    #         - RCLONE_MOUNT_DIR=storj:/dvr
+    #         - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
+    #         - RCLONE_MOUNT_TARGET=/data/dvr
+    #         - ANTENNAS_URL=http://localhost:5004
+    #         - TVHEADEND_URL=http://vpn_tvheadend:9981
+    #         - TUNER_COUNT=10
+    #         - DEVICE_UUID=3c1255f2-208e-47fa-90a5-c2d828dadd24
+    #     volumes:
+    #         - /mnt/data/plex_dvr:/config
+    #         - /tmp/plex-transcode-dvr:/transcode
+    #         - /tmp:/tmp
+    #         - /tmp/caches/plex_dvr:/caches/rclone_plex
 
     cloudflare_plex:
         image: jonoh/cloudflared:2022.6.3
@@ -519,3 +545,29 @@ services:
             - TUNNEL_SECRET=${VAULT_TUNNEL_SECRET}
         networks:
           - vaultwarden
+
+    github_runner_runner:
+        image: docker
+        restart: always
+        environment:
+            IMAGE: *GH_RUNNER_IMAGE
+            DOCKER_HOST: unix:///var/run/docker.sock
+            ENV_FILE: |
+                RUNNER_NAME=larry
+                GITHUB_PERSONAL_TOKEN=${GITHUB_TOKEN}
+                GITHUB_OWNER=hillnz
+                RUNNER_LABELS=self-hosted,linux,arm64
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - gh_runner
+        entrypoint: ["sh", "-c"]
+        command: [
+            echo "$ENV_FILE" >.env;
+            docker run
+                --runtime sysbox-runc
+                --name=gh-runner-$(date +%s)
+                --rm
+                --env-file=.env
+                "$IMAGE"
+        ]
