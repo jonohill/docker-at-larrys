@@ -2,15 +2,10 @@
     "extends": [
       "config:base"
     ],
-    "docker-compose": {
-      "fileMatch": [
-        "^.*docker-at-home[^/]*\\.ya?ml$"
-      ]
-    },
     "automerge": true,
     "regexManagers": [
       {
-        "fileMatch": [ "^.*docker-at-home[^/]*\\.ya?ml$" ],
+        "fileMatch": [ "^docker-compose.ya?ml$" ],
         "matchStrings": [
           "versioning=(?<versioning>\\S+)\\s*-\\s+&\\w+_IMAGE\\s+(?<depName>[\\w/_\\-]+):(?<currentValue>[\\w\\.\\_\\-]+)"
         ],
