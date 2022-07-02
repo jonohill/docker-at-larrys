@@ -566,7 +566,7 @@ services:
             echo "$$ENV_FILE" >.env;
             docker run
                 --runtime sysbox-runc
-                --name=gh-runner-$(date +%s)
+                --name=gh-runner-$$(date +%s)
                 --rm
                 --env-file=.env
                 "$$IMAGE"
