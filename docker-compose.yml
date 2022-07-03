@@ -260,7 +260,7 @@ services:
         image: jonoh/cloudflared:2022.6.3
         restart: always
         volumes:
-            - /mnt/data/cloudflare_plex:/config
+            - /mnt/data/cloudflare_plex_dvr:/config
         environment:
             - TZ=Pacific/Auckland
             - TUNNEL_URL=http://plex_dvr:32400
