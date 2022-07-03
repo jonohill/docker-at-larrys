@@ -186,7 +186,6 @@ services:
         environment:
             - TZ=Pacific/Auckland
             - HOSTNAME=larry
-            - PLEX_CLAIM=${PLEX_CLAIM}
             - INCOMING_DIR=/data/incoming
             - RCLONE_MOUNT_DIR=jotta:/plex-media
             - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
@@ -213,28 +212,6 @@ services:
         healthcheck:
             start_period: 120s
 
-    # plex_dvr:
-    #     image: ghcr.io/jonohill/docker-nas-plex-dvr:2022.170.539
-    #     restart: always
-    #     labels:
-    #         - autoheal=true
-    #     environment:
-    #         - TZ=Pacific/Auckland
-    #         - HOSTNAME=dvr
-    #         - PLEX_CLAIM=${PLEX_CLAIM}
-    #         - RCLONE_MOUNT_DIR=storj:/dvr
-    #         - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
-    #         - RCLONE_MOUNT_TARGET=/data/dvr
-    #         - ANTENNAS_URL=http://localhost:5004
-    #         - TVHEADEND_URL=http://vpn_tvheadend:9981
-    #         - TUNER_COUNT=10
-    #         - DEVICE_UUID=3c1255f2-208e-47fa-90a5-c2d828dadd24
-    #     volumes:
-    #         - /mnt/data/plex_dvr:/config
-    #         - /tmp/plex-transcode-dvr:/transcode
-    #         - /tmp:/tmp
-    #         - /tmp/caches/plex_dvr:/caches/rclone_plex
-
     cloudflare_plex:
         image: jonoh/cloudflared:2022.6.3
         restart: always
@@ -246,7 +223,51 @@ services:
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
             - TUNNEL_NAME=plex
             - TUNNEL_ID=${PLEX_TUNNEL_ID}
-            - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}        
+            - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}
+
+    plex_dvr:
+        image: ghcr.io/hillnz/docker-nas-plex-dvr:47
+        restart: always
+        labels:
+            - autoheal=true
+        environment:
+            - TZ=Pacific/Auckland
+            - HOSTNAME=dvr
+            - PLEX_CLAIM=${PLEX_CLAIM}
+            - RCLONE_MOUNT_DIR=storj:/
+            - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
+            - RCLONE_MOUNT_TARGET=/data/dvr
+            - RCLONE_WRITE_BACK=900
+            - ANTENNAS_URL=http://localhost:5004
+            - TVHEADEND_URL=http://vpn_tvheadend:9981
+            - TUNER_COUNT=10
+            - DEVICE_UUID=3c1255f2-208e-47fa-90a5-c2d828dadd24
+        volumes:
+            - /mnt/data/plex_dvr:/config
+            - /tmp/plex-transcode-dvr:/transcode
+            - /tmp:/tmp
+            - /tmp/caches/plex_dvr:/caches/rclone_plex
+        cap_add:
+            - SYS_ADMIN
+        devices:
+            - /dev/fuse
+        security_opt:
+            - apparmor:unconfined
+        healthcheck:
+            start_period: 120s
+
+    cloudflare_plex_dvr:
+        image: jonoh/cloudflared:2022.6.3
+        restart: always
+        volumes:
+            - /mnt/data/cloudflare_plex:/config
+        environment:
+            - TZ=Pacific/Auckland
+            - TUNNEL_URL=http://plex_dvr:32400
+            - ACCOUNT_ID=${CF_ACCOUNT_ID}
+            - TUNNEL_NAME=plex-dvr
+            - TUNNEL_ID=${PLEX_DVR_TUNNEL_ID}
+            - TUNNEL_SECRET=${PLEX_DVR_TUNNEL_SECRET}         
 
     rclone_move_media:
         image: rclone/rclone:1.58.1
