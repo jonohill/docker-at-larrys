@@ -242,6 +242,7 @@ services:
             - TVHEADEND_URL=http://vpn_tvheadend:9981
             - TUNER_COUNT=10
             - DEVICE_UUID=3c1255f2-208e-47fa-90a5-c2d828dadd24
+            - RUST_LOG=dvr_manager=debug
             - DVR_MANAGER_TV_LIBRARY_ID=1
             - DVR_MANAGER_FILM_LIBRARY_ID=2
             - DVR_MANAGER_CHANNELS='["tv.55"]'
