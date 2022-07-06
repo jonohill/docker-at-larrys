@@ -237,7 +237,7 @@ services:
             - RCLONE_MOUNT_DIR=storj:/
             - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
             - RCLONE_MOUNT_TARGET=/data/dvr
-            - RCLONE_WRITE_BACK=900
+            - RCLONE_WRITE_BACK=900s
             - ANTENNAS_URL=http://localhost:5004
             - TVHEADEND_URL=http://vpn_tvheadend:9981
             - TUNER_COUNT=10
