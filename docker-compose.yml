@@ -245,7 +245,7 @@ services:
             - RUST_LOG=dvr_manager=debug
             - DVR_MANAGER_TV_LIBRARY_ID=1
             - DVR_MANAGER_FILM_LIBRARY_ID=2
-            - DVR_MANAGER_CHANNELS='["tv.55"]'
+            - DVR_MANAGER_CHANNELS=["tv.55"]
             - DVR_MANAGER_SIZE_LIMIT=149000000000
         volumes:
             - /mnt/data/plex_dvr:/config
