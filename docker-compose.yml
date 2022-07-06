@@ -226,7 +226,7 @@ services:
             - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}
 
     plex_dvr:
-        image: ghcr.io/hillnz/docker-nas-plex-dvr:47
+        image: ghcr.io/hillnz/docker-nas-plex-dvr:49
         restart: always
         labels:
             - autoheal=true
@@ -242,6 +242,10 @@ services:
             - TVHEADEND_URL=http://vpn_tvheadend:9981
             - TUNER_COUNT=10
             - DEVICE_UUID=3c1255f2-208e-47fa-90a5-c2d828dadd24
+            - DVR_MANAGER_TV_LIBRARY_ID=1
+            - DVR_MANAGER_FILM_LIBRARY_ID=2
+            - DVR_MANAGER_CHANNELS='["tv.55"]'
+            - DVR_MANAGER_SIZE_LIMIT=149000000000
         volumes:
             - /mnt/data/plex_dvr:/config
             - /tmp/plex-transcode-dvr:/transcode
