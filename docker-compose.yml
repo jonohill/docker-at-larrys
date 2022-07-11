@@ -600,7 +600,7 @@ services:
         ]
 
     storj:
-        image: ghcr.io/jonohill/nas-storj:11
+        image: ghcr.io/jonohill/nas-storj:12
         # restart: always
         environment:
             - RCLONE_CONFIG=/config/rclone.conf
