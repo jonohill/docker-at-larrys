@@ -601,7 +601,7 @@ services:
 
     storj:
         image: ghcr.io/jonohill/nas-storj:14
-        # restart: always
+        restart: always
         environment:
             - RCLONE_CONFIG=/config/rclone.conf
             - RCLONE_MOUNT_CACHE_DIR=/cache
@@ -612,7 +612,6 @@ services:
             - ADDRESS=${PUBLIC_IP}:28967
             - STORAGE=650GB
             - WALLET_FEATURES=zksync
-            - SETUP=true
         volumes:
             - /mnt/data/storj:/config
             - /mnt/data/storj/identity:/app/identity
