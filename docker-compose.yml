@@ -13,7 +13,7 @@ networks:
 x-images:
     # Hardcodes version 3 because only 3 version parts are supported
     # renovate: versioning=regex:^3\.(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)-ls\d+$
-    - &SONARR_IMAGE linuxserver/sonarr:3.0.6.1265-ls111
+    - &SONARR_IMAGE linuxserver/sonarr:3.0.8.1507-ls149
     # renovate: versioning=semver
     - &GH_RUNNER_IMAGE ghcr.io/jonohill/gh-runner:v3.4.5
 
