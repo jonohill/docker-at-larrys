@@ -600,7 +600,7 @@ services:
         ]
 
     storj:
-        image: ghcr.io/jonohill/nas-storj:10
+        image: ghcr.io/jonohill/nas-storj:11
         # restart: always
         environment:
             - RCLONE_CONFIG=/config/rclone.conf
@@ -617,6 +617,12 @@ services:
             - /mnt/data/storj:/config
             - /mnt/data/storj/identity:/app/identity
             - /tmp/storj_cache:/cache
+        cap_add:
+            - SYS_ADMIN
+        devices:
+            - /dev/fuse
+        security_opt:
+            - apparmor:unconfined
         networks:
             - storj
 
