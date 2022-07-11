@@ -605,8 +605,8 @@ services:
         environment:
             - RCLONE_CONFIG=/config/rclone.conf
             - RCLONE_MOUNT_CACHE_DIR=/cache
-            - RCLONE_MOUNT_DIR=/app/config
-            - RCLONE_MOUNT_TARGET=onedrive:/
+            - RCLONE_MOUNT_DIR=onedrive:/
+            - RCLONE_MOUNT_TARGET=/app/config
             - WALLET=${STORJ_WALLET}
             - EMAIL=${EMAIL}
             - ADDRESS=${PUBLIC_IP}:28967
