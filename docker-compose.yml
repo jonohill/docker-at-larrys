@@ -7,6 +7,7 @@ networks:
     vaultwarden: {}
     filerun: {}
     gh_runner: {}
+    storj: {}
 
 # Images which require special regex handling for renovate
 x-images:
@@ -597,3 +598,39 @@ services:
                 --env-file=.env
                 "$$IMAGE"
         ]
+
+    storj:
+        image: ghcr.io/jonohill/nas-storj:9
+        # restart: always
+        environment:
+            - RCLONE_CONFIG=/config/rclone.conf
+            - RCLONE_MOUNT_CACHE_DIR=/cache
+            - RCLONE_MOUNT_DIR=/app/config
+            - RCLONE_MOUNT_TARGET=onedrive:/
+            - WALLET=${STORJ_WALLET}
+            - EMAIL=${EMAIL}
+            - ADDRESS=${PUBLIC_IP}:28967
+            - STORAGE=650GB
+            - WALLET_FEATURES=zksync
+            - SETUP=true
+        volumes:
+            - /mnt/data/storj:/config
+            - /mnt/data/storj/identity:/app/identity
+            - /tmp/storj_cache:/cache
+        networks:
+            - storj
+
+    cloudflare_storj:
+        image: jonoh/cloudflared:2022.6.3
+        restart: always
+        volumes:
+            - /mnt/data/cloudflare_storj:/config
+        environment:
+            - TZ=Pacific/Auckland
+            - TUNNEL_URL=http://storj:14002
+            - ACCOUNT_ID=${CF_ACCOUNT_ID}
+            - TUNNEL_NAME=storj
+            - TUNNEL_ID=${STORJ_TUNNEL_ID}
+            - TUNNEL_SECRET=${STORJ_TUNNEL_SECRET}
+        networks:
+            - storj
