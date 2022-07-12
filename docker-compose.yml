@@ -610,7 +610,7 @@ services:
             - WALLET=${STORJ_WALLET}
             - EMAIL=${EMAIL}
             - ADDRESS=${PUBLIC_IP}:28967
-            - STORAGE=650GB
+            - STORAGE=650000000 # 650 GB
             - WALLET_FEATURES=zksync
         volumes:
             - /mnt/data/storj:/config
