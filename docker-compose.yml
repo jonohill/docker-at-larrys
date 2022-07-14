@@ -600,8 +600,10 @@ services:
         ]
 
     storj:
-        image: ghcr.io/jonohill/nas-storj:14
+        image: ghcr.io/jonohill/nas-storj:15
         restart: always
+        labels:
+            - autoheal=true        
         environment:
             - RCLONE_CONFIG=/config/rclone.conf
             - RCLONE_MOUNT_CACHE_DIR=/cache
