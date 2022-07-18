@@ -600,15 +600,15 @@ services:
         ]
 
     storj:
-        image: ghcr.io/jonohill/nas-storj:19
+        image: ghcr.io/jonohill/nas-storj:20
         restart: always
         labels:
             - autoheal=true        
         environment:
             - RCLONE_CONFIG=/config/rclone.conf
             - RCLONE_MOUNT_CACHE_DIR=/cache
-            - RCLONE_MOUNT_DIR=onedrive:/storage/blobs
-            - BLOB_DIR=/app/config/storage/blobs
+            - RCLONE_BASE_DIR=onedrive:/storage
+            - STORAGE_DIR=/app/config/storage
             - WALLET=${STORJ_WALLET}
             - EMAIL=${EMAIL}
             - ADDRESS=${PUBLIC_IP}:28967
