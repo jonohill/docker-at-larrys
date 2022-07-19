@@ -600,7 +600,7 @@ services:
         ]
 
     storj:
-        image: ghcr.io/jonohill/nas-storj:23
+        image: ghcr.io/jonohill/nas-storj:24
         restart: always
         labels:
             - autoheal=true        
