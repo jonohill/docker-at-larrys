@@ -227,7 +227,7 @@ services:
             - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}
 
     plex_dvr:
-        image: ghcr.io/hillnz/docker-nas-plex-dvr:49
+        image: ghcr.io/hillnz/docker-nas-plex-dvr:63
         restart: always
         labels:
             - autoheal=true
