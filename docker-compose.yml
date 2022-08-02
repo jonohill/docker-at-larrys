@@ -442,7 +442,7 @@ services:
         restart: always
 
     twitterdedupe-redis:
-        image: redis:6.2.6
+        image: redis:7.0.4
         volumes:
             - /mnt/data/twitterdedupe:/data
         command: redis-server --appendonly yes
