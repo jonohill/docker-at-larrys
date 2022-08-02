@@ -403,7 +403,7 @@ services:
         restart: always
 
     pgadmin:
-        image: dpage/pgadmin4:6.8
+        image: dpage/pgadmin4:6.12
         restart: always
         environment:
             - TZ=Pacific/Auckland
