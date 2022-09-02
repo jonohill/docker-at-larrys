@@ -317,6 +317,8 @@ services:
             - OPENVPN_USERNAME=${VPN_USERNAME}
             - OPENVPN_PASSWORD=${VPN_PASSWORD}
             - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=1
+        ports:
+            - 9091:9091
 
     cloudflare_transmission:
         image: jonoh/cloudflared:2022.7.1
