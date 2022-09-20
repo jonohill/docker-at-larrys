@@ -251,7 +251,7 @@ services:
         restart: always
 
     transmission:
-        image: haugene/transmission-openvpn:4.0
+        image: jonoh/nas-transmission:v0.0.71
         restart: always
         labels:
             - autoheal=true
