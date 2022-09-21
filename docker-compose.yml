@@ -279,7 +279,6 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /home/ubuntu/compose/config/ovpn/config.ovpn:/config/openvpn/config.ovpn
         environment:
-            - OPENVPN_PROVIDER=custom
             - OPENVPN_USERNAME=${VPN_USERNAME}
             - OPENVPN_PASSWORD=${VPN_PASSWORD}
             - PUID=1000
