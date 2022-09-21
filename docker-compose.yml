@@ -250,34 +250,15 @@ services:
             - /mnt/data/tmp/plex-media:/output
         restart: always
 
-    transmission:
-        image: jonoh/nas-transmission:v0.0.71
-        restart: always
-        labels:
-            - autoheal=true
-        cap_add:
-            - NET_ADMIN
-        volumes:
-            - /mnt/data/bt:/data/transmission-home
-            - /mnt/data/downloads-incomplete:/data/incomplete
-            - /mnt/data/downloads:/data/completed
-            - /home/ubuntu/compose/config/ovpn/config.ovpn:/etc/openvpn/custom/default.ovpn
-        environment:
-            - TZ=Pacific/Auckland
-            - OPENVPN_PROVIDER=custom
-            - OPENVPN_USERNAME=${VPN_USERNAME}
-            - OPENVPN_PASSWORD=${VPN_PASSWORD}
-            - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=1
-        ports:
-            - 9091:9091
-
     qbittorrent:
         image: guillaumedsde/alpine-qbittorrent-openvpn:python
+        labels:
+            - autoheal=true        
         volumes:
+            - /mnt/data/downloads-incomplete:/downloads-incomplete
             - /mnt/data/downloads:/downloads
             - /mnt/data/qbt:/config
             - /etc/localtime:/etc/localtime:ro
-            # - /home/ubuntu/compose/config/ovpn/config.ovpn:/config/openvpn/config.ovpn
         environment:
             - OPENVPN_PROVIDER=surfshark
             - OPENVPN_CONFIG=au-syd_udp
@@ -285,32 +266,23 @@ services:
             - OPENVPN_PASSWORD=${VPN_PASSWORD}
             - PUID=1000
             - PGID=1000
-            # - LAN=100.122.31.127/16
         ports:
             - 9092:8080
         cap_add:
             - NET_ADMIN
 
-    cloudflare_transmission:
+    cloudflare_qbittorrent:
         image: jonoh/cloudflared:2022.9.0
         restart: always
         volumes:
-            - /mnt/data/cloudflare_transmission:/config
+            - /mnt/data/cloudflare_qbt:/config
         environment:
             - TZ=Pacific/Auckland
-            - TUNNEL_URL=http://transmission:9091
+            - TUNNEL_URL=http://qbittorrent:8080
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
-            - TUNNEL_NAME=transmission
-            - TUNNEL_ID=${TRANSMISSION_TUNNEL_ID}
-            - TUNNEL_SECRET=${TRANSMISSION_TUNNEL_SECRET}
-    
-    transmission_cleanup:
-        image: jonoh/transmission-cleanup:v0.0.26
-        restart: always
-        volumes:
-            - /mnt/data/downloads:/cleanup
-        environment: 
-            - TRANSMISSION_HOST=transmission
+            - TUNNEL_NAME=qbt
+            - TUNNEL_ID=${QBT_TUNNEL_ID}
+            - TUNNEL_SECRET=${QBT_TUNNEL_SECRET}               
 
     # ~~
     # TV
