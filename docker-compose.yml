@@ -271,6 +271,25 @@ services:
         ports:
             - 9091:9091
 
+    qbittorrent:
+        image: guillaumedsde/alpine-qbittorrent-openvpn:python
+        volumes:
+            - /mnt/data/downloads:/downloads
+            - /mnt/data/qbt:/config
+            - /etc/localtime:/etc/localtime:ro
+            - /home/ubuntu/compose/config/ovpn/config.ovpn:/config/openvpn/config.ovpn
+        environment:
+            - OPENVPN_PROVIDER=custom
+            - OPENVPN_USERNAME=${VPN_USERNAME}
+            - OPENVPN_PASSWORD=${VPN_PASSWORD}
+            - PUID=1000
+            - PGID=1000
+            - LAN=100.122.31.127/16
+        ports:
+            - 9092:8080
+        cap_add:
+            - NET_ADMIN
+
     cloudflare_transmission:
         image: jonoh/cloudflared:2022.9.0
         restart: always
