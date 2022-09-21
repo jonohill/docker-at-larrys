@@ -277,8 +277,10 @@ services:
             - /mnt/data/downloads:/downloads
             - /mnt/data/qbt:/config
             - /etc/localtime:/etc/localtime:ro
-            - /home/ubuntu/compose/config/ovpn/config.ovpn:/config/openvpn/config.ovpn
+            # - /home/ubuntu/compose/config/ovpn/config.ovpn:/config/openvpn/config.ovpn
         environment:
+            - OPENVPN_PROVIDER=surfshark
+            - OPENVPN_CONFIG=au-syd_udp
             - OPENVPN_USERNAME=${VPN_USERNAME}
             - OPENVPN_PASSWORD=${VPN_PASSWORD}
             - PUID=1000
