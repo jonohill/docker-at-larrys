@@ -283,7 +283,7 @@ services:
             - OPENVPN_PASSWORD=${VPN_PASSWORD}
             - PUID=1000
             - PGID=1000
-            - LAN=100.122.31.127/16
+            # - LAN=100.122.31.127/16
         ports:
             - 9092:8080
         cap_add:
