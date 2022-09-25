@@ -251,25 +251,30 @@ services:
         restart: always
 
     qbittorrent:
-        image: guillaumedsde/alpine-qbittorrent-openvpn:python
+        image: hotio/qbittorrent:release-4.4.5
+        name: qbittorrent
         labels:
             - autoheal=true        
         volumes:
             - /mnt/data/downloads-incomplete:/downloads-incomplete
             - /mnt/data/downloads:/downloads
             - /mnt/data/qbt:/config
-            - /etc/localtime:/etc/localtime:ro
         environment:
-            - OPENVPN_PROVIDER=surfshark
-            - OPENVPN_CONFIG=au-syd_udp
-            - OPENVPN_USERNAME=${VPN_USERNAME}
-            - OPENVPN_PASSWORD=${VPN_PASSWORD}
+            - TZ=Pacific/Auckland
             - PUID=1000
             - PGID=1000
+            - VPN_ENABLED=true
+            - VPN_CONF=wg0
+            - VPN_IP_CHECK_DELAY=5
+            - PRIVOXY_ENABLED=false
+            - WEBUI_PORTS=9092/tcp
         ports:
-            - 9092:8080
+            - 9092:9092
         cap_add:
             - NET_ADMIN
+        sysctls:
+            - net.ipv4.conf.all.src_valid_mark=1
+            - net.ipv6.conf.all.disable_ipv6=1
 
     cloudflare_qbittorrent:
         image: jonoh/cloudflared:2022.9.1
@@ -278,7 +283,7 @@ services:
             - /mnt/data/cloudflare_qbt:/config
         environment:
             - TZ=Pacific/Auckland
-            - TUNNEL_URL=http://qbittorrent:8080
+            - TUNNEL_URL=http://qbittorrent:9092
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
             - TUNNEL_NAME=qbt
             - TUNNEL_ID=${QBT_TUNNEL_ID}
