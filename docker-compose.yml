@@ -326,8 +326,6 @@ services:
         environment:
             - RCLONE_MOUNT_CACHE_DIR=/cache
             - MOUNT_SOURCE=recordings:/
-        networks:
-            - nextpvr
 
     cloudflare_nextpvr:
         image: jonoh/cloudflared:2022.9.1
