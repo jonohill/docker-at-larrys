@@ -333,7 +333,7 @@ services:
         image: jonoh/cloudflared:2022.9.1
         restart: always
         volumes:
-            - /mnt/data/cloudflare_qbt:/config
+            - /mnt/data/cloudflare_nextpvr:/config
         environment:
             - TZ=Pacific/Auckland
             - TUNNEL_URL=http://vpn_nextpvr:8866
