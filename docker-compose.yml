@@ -379,7 +379,7 @@ services:
             - /mnt/data/cloudflare_pgadmin:/config        
 
     radio_db:
-        image: jonoh/radio_db:0.3.28
+        image: jonoh/radio_db:0.3.52
         container_name: radio_db
         environment:
             - RDB_DATABASE_HOST=postgres
