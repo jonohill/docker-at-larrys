@@ -295,7 +295,7 @@ services:
     # ~~
 
     vpn_nextpvr:
-        image: qmcgaw/gluetun:v3.30.0
+        image: qmcgaw/gluetun:v3.32.0
         container_name: vpn_nextpvr
         restart: always
         cap_add:
