@@ -189,6 +189,10 @@ services:
             - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
             - RCLONE_MOUNT_TARGET=/data/plex-media
             - RCLONE_CACHE_MAX_SIZE=25G
+            - RCLONE_CONFIG_2=/config/rclone2.conf
+            - RCLONE_MOUNT_DIR_2=od_recordings:/
+            - RCLONE_MOUNT_CACHE_DIR_2=/caches/rclone_plex_od
+            - RCLONE_MOUNT_TARGET_2=/data/recordings
             # Antennas
             - ANTENNAS_URL=http://localhost:5004
             - TVHEADEND_URL=http://vpn_tvheadend:9981
@@ -318,12 +322,12 @@ services:
             - SYS_ADMIN
         security_opt:
             - apparmor:unconfined            
-        volumes:
-            - /mnt/data/tmp/nextpvr-cache:/cache
-            - /mnt/data/nextpvr:/config
         environment:
-            - RCLONE_MOUNT_CACHE_DIR=/cache
-            - MOUNT_SOURCE=recordings:/
+            - RECORDED_DIR=/recorded
+        volumes:
+            - /mnt/data/nextpvr:/config
+            - /mnt/data/tmp/nextpvr/inprogress:/recordings
+            - /mnt/data/tmp/nextpvr/recorded:/recorded
 
     cloudflare_nextpvr:
         image: jonoh/cloudflared:2022.11.0
@@ -340,31 +344,30 @@ services:
         networks:
             - nextpvr
 
-    jellyfin:
-        image: lscr.io/linuxserver/jellyfin:10.8.7
-        restart: always
+    filebot_tv:
+        image: jonoh/nas-filebot:v0.0.17
         environment:
             - TZ=Pacific/Auckland
-            - PUID=1000
-            - PGID=1000
-            - JELLYFIN_PublishedServerUrl=https://tv.hillnz.com/
+            - LANG=C.UTF-8
         volumes:
-            - /mnt/data/jellyfin:/config
+            - /mnt/data/filebot_tv:/config
+            - /mnt/data/tmp/nextpvr/recorded:/input
+            - /mnt/data/tmp/nextpvr/sorted:/output
+        restart: always    
         networks:
-            - nextpvr
+            - nextpvr            
 
-    cloudflare_jellyfin:
-        image: jonoh/cloudflared:2022.9.1
-        restart: always
+    rclone_move_tv:
+        image: rclone/rclone:1.59.2
         volumes:
-            - /mnt/data/cloudflare_jellyfin:/config
+            - /mnt/data/tmp/nextpvr/sorted:/source
+            - /mnt/data/rclone_move_tv:/config
+            - /home/ubuntu/compose/config/rclone_move_media/entrypoint:/entrypoint
         environment:
-            - TZ=Pacific/Auckland
-            - TUNNEL_URL=http://jellyfin:8096
-            - ACCOUNT_ID=${CF_ACCOUNT_ID}
-            - TUNNEL_NAME=tv
-            - TUNNEL_ID=${TV_TUNNEL_ID}
-            - TUNNEL_SECRET=${TV_TUNNEL_SECRET}      
+            - SOURCE=/source
+            - DEST=od_recordings:/
+        entrypoint: /entrypoint
+        restart: always
         networks:
             - nextpvr
 
