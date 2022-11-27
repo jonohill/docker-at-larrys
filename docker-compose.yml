@@ -132,7 +132,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
 
     filerun:
-        image: filerun/filerun:arm64v8
+        image: ghcr.io/jonohill/nas-filerun:3
         restart: always
         environment:
             FR_DB_HOST: filerun_db
@@ -146,7 +146,8 @@ services:
             APACHE_RUN_GROUP_ID: 33
             TZ: Pacific/Auckland
         volumes:
-            - /mnt/data/filerun/data:/user-files
+            - /mnt/data/filerun:/var/www/html/system/data
+            - /mnt/data:/user-files
         networks:
             - filerun
 
