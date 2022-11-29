@@ -341,7 +341,7 @@ services:
             - nextpvr
 
     jellyfin:
-        image: lscr.io/linuxserver/jellyfin:10.8.7
+        image: lscr.io/linuxserver/jellyfin:2021.12.16
         restart: always
         environment:
             - TZ=Pacific/Auckland
