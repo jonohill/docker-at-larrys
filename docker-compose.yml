@@ -312,16 +312,10 @@ services:
             - nextpvr
 
     nextpvr:
-        image: ghcr.io/jonohill/nas-nextpvr:14
+        image: ghcr.io/jonohill/nas-nextpvr:15
         container_name: nextpvr
         network_mode: "service:vpn_nextpvr"
         restart: always
-        devices:
-            - /dev/fuse
-        cap_add:
-            - SYS_ADMIN
-        security_opt:
-            - apparmor:unconfined            
         environment:
             - RECORDED_DIR=/recorded
         volumes:
@@ -346,6 +340,7 @@ services:
 
     filebot_tv:
         image: jonoh/nas-filebot:v0.0.17
+        restart: always    
         environment:
             - TZ=Pacific/Auckland
             - LANG=C.UTF-8
@@ -353,21 +348,18 @@ services:
             - /mnt/data/filebot_tv:/config
             - /mnt/data/tmp/nextpvr/recorded:/input
             - /mnt/data/tmp/nextpvr/sorted:/output
-        restart: always    
         networks:
             - nextpvr            
 
     rclone_move_tv:
-        image: rclone/rclone:1.59.2
+        image: ghcr.io/jonohill/rclone-move:5
+        restart: always
         volumes:
             - /mnt/data/tmp/nextpvr/sorted:/source
             - /mnt/data/rclone_move_tv:/config
-            - /home/ubuntu/compose/config/rclone_move_media/entrypoint:/entrypoint
         environment:
             - SOURCE=/source
             - DEST=od_recordings:/
-        entrypoint: /entrypoint
-        restart: always
         networks:
             - nextpvr
 
