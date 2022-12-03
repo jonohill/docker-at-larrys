@@ -339,7 +339,7 @@ services:
             - nextpvr
 
     filebot_tv:
-        image: jonoh/nas-filebot:v0.0.21
+        image: jonoh/nas-filebot:v0.0.22
         restart: always    
         environment:
             - TZ=Pacific/Auckland
