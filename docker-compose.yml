@@ -361,6 +361,8 @@ services:
         environment:
             - SOURCE=/source
             - DEST=od_recordings:/
+            # 900 GB
+            - RCLONE_SIZE_LIMIT=966367641600
         networks:
             - nextpvr
 
