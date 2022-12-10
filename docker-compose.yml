@@ -339,12 +339,13 @@ services:
             - nextpvr
 
     filebot_tv:
-        image: jonoh/nas-filebot:v0.0.22
+        image: jonoh/nas-filebot:v0.0.23
         restart: always    
         environment:
             - TZ=Pacific/Auckland
             - LANG=C.UTF-8
             - FILEBOT_ACTION=move
+            - CLEANUP_AFTER_PROCESSING=true
         volumes:
             - /mnt/data/filebot_tv:/config
             - /mnt/data/tmp/nextpvr/recorded:/input
