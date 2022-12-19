@@ -354,7 +354,7 @@ services:
             - nextpvr            
 
     rclone_move_tv:
-        image: ghcr.io/jonohill/rclone-move:8
+        image: ghcr.io/jonohill/rclone-move:9
         restart: always
         volumes:
             - /mnt/data/tmp/nextpvr/sorted:/source
