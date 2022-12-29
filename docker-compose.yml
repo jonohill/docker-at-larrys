@@ -26,11 +26,13 @@ services:
     # ~~~~~~~~~~~~ 
 
     healthchecks:
-        image: ghcr.io/jonohill/nas-healthchecks:4
+        image: ghcr.io/jonohill/nas-healthchecks:5
         restart: always
+        volumes:
+            - /mnt/data/healthchecks:/config
         environment:
             - PING_URL=${HEALTHCHECKS_PING_URL}
-            - DF_HIGHWATERMARK=65
+            - DF_HIGHWATERMARK=90
             - DF_FILESYSTEMS=/dev/sda1,/dev/sdb1
 
     compose_up:
