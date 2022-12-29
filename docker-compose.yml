@@ -26,7 +26,7 @@ services:
     # ~~~~~~~~~~~~ 
 
     healthchecks:
-        image: ghcr.io/jonohill/nas-healthchecks:5
+        image: ghcr.io/jonohill/nas-healthchecks:6
         restart: always
         volumes:
             - /mnt/data/healthchecks:/config
