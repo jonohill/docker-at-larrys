@@ -297,17 +297,17 @@ services:
         networks:
             - nextpvr
 
-    nextpvr:
-        image: ghcr.io/jonohill/nas-nextpvr:21
-        container_name: nextpvr
-        network_mode: "service:vpn_nextpvr"
-        restart: always
-        environment:
-            - RECORDED_DIR=/recorded
-        volumes:
-            - /mnt/data/nextpvr:/config
-            - /mnt/data/tmp/nextpvr/inprogress:/recordings
-            - /mnt/data/tmp/nextpvr/recorded:/recorded
+    # nextpvr:
+    #     image: ghcr.io/jonohill/nas-nextpvr:21
+    #     container_name: nextpvr
+    #     network_mode: "service:vpn_nextpvr"
+    #     restart: always
+    #     environment:
+    #         - RECORDED_DIR=/recorded
+    #     volumes:
+    #         - /mnt/data/nextpvr:/config
+    #         - /mnt/data/tmp/nextpvr/inprogress:/recordings
+    #         - /mnt/data/tmp/nextpvr/recorded:/recorded
 
     cloudflare_nextpvr:
         image: jonoh/cloudflared:2022.11.1
