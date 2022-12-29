@@ -25,6 +25,14 @@ services:
     # Server admin
     # ~~~~~~~~~~~~ 
 
+    healthchecks:
+        image: jonoh/healthchecks:4
+        restart: always
+        environment:
+            - PING_URL=${HEALTHCHECKS_PING_URL}
+            - DF_HIGHWATERMARK=65
+            - DF_FILESYSTEMS=/dev/sda1,/dev/sdb1
+
     compose_up:
         image: jonoh/compose-up:v0.0.10
         restart: always
