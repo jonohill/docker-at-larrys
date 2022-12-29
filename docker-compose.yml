@@ -58,20 +58,6 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         entrypoint: /compose/forever.sh
 
-    tailscale:
-        image: jonoh/tailscale:1.18.1
-        devices:
-            - /dev/net/tun:/dev/net/tun
-        volumes:
-            - /mnt/data/tailscale:/var/lib/tailscale
-        network_mode: host
-        runtime: runc
-        privileged: true
-        environment:
-            - AUTH_KEY=${TAILSCALE_AUTH_KEY}
-        command: --hostname=larry --advertise-exit-node
-        restart: always
-
     cloudflare_ssh:
         image: jonoh/cloudflared:2022.11.1
         restart: always
