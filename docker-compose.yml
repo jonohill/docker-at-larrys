@@ -110,6 +110,7 @@ services:
             - PRUNE_KEEP_POLICIES=0:360;30:180;7:30;1:7
             - PRE_BACKUP_SCRIPT=/usr/local/bin/pre_backup.sh
             - HEALTHCHECK_URL=${DUPLICACY_HEALTHCHECK_URL}
+            - FILTER_PATTERNS=-downloads/;-tmp/
         volumes:
             - /mnt/data:/data
             - /mnt/data/duplicacy_naspool/config:/config
