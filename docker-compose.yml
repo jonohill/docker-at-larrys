@@ -98,7 +98,7 @@ services:
             - backup
 
     duplicacy:
-        image: ghcr.io/jonohill/nas-duplicacy:4
+        image: ghcr.io/jonohill/nas-duplicacy:5
         environment:
             - BACKUP_CRON=1 * * * *
             - RUN_JOB_IMMEDIATELY=yes
