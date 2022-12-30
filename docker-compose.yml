@@ -98,7 +98,7 @@ services:
             - backup
 
     duplicacy:
-        image: jonoh/duplicacy:2.7.2
+        image: jonoh/duplicacy:3.1.0
         environment:
             - BACKUP_CRON=1 * * * *
             - RUN_JOB_IMMEDIATELY=yes
