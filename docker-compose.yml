@@ -350,7 +350,7 @@ services:
             - nextpvr            
 
     rclone_move_tv:
-        image: ghcr.io/jonohill/rclone-move:10
+        image: ghcr.io/jonohill/rclone-move:15
         restart: always
         volumes:
             - /mnt/data/tmp/nextpvr/sorted:/source
@@ -360,6 +360,7 @@ services:
             - DEST=od_recordings:/
             # 900 GB
             - RCLONE_SIZE_LIMIT=966367641600
+            - RCLONE_EXTRA_FLAGS=--onedrive-no-versions
         networks:
             - nextpvr
 
