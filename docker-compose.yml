@@ -363,7 +363,7 @@ services:
             # 900 GB
             - RCLONE_SIZE_LIMIT=966367641600
             - RCLONE_EXTRA_FLAGS=--onedrive-no-versions
-            - MAX_PATH_LENGTH=200
+            - MAX_PATH_LENGTH=180
         networks:
             - nextpvr
 
