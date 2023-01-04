@@ -177,6 +177,7 @@ services:
 
     plex:
         image: jonoh/nas-plex:v0.0.93
+        container_name: plex
         restart: always
         labels:
             - autoheal=true
