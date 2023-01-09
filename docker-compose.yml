@@ -84,7 +84,7 @@ services:
             - TUNNEL_SECRET=${SSH_TUNNEL_SECRET}
 
     rclone_serve_backup:
-        image: rclone/rclone:1.60.1
+        image: rclone/rclone:1.61.1
         volumes:
             - /mnt/data/rclone_serve_backup:/config
             - /tmp/caches/rclone_serve_backup:/root/.cache
@@ -228,7 +228,7 @@ services:
             - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}     
 
     rclone_move_media:
-        image: rclone/rclone:1.60.1
+        image: rclone/rclone:1.61.1
         volumes:
             - /mnt/data/tmp/plex-media:/source
             - /mnt/data/rclone_move_media:/config
