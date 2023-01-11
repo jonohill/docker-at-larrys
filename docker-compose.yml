@@ -241,7 +241,7 @@ services:
         restart: always
 
     filebot:
-        image: jonoh/nas-filebot:v0.0.23
+        image: jonoh/nas-filebot:v0.0.24
         environment:
             - TZ=Pacific/Auckland
             - LANG=C.UTF-8
