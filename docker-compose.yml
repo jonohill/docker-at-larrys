@@ -366,7 +366,7 @@ services:
         restart: always
 
     pgadmin:
-        image: dpage/pgadmin4:6.8
+        image: dpage/pgadmin4:6.18
         restart: always
         environment:
             - TZ=Pacific/Auckland
