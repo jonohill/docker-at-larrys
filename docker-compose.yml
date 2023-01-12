@@ -109,7 +109,7 @@ services:
             - PRE_BACKUP_SCRIPT=/usr/local/bin/pre_backup.sh
             - PRUNE_CRON=34 1 * * sun
             - PRUNE_KEEP_POLICIES=0:360;30:180;7:30;1:7
-            - PRUNE_OPTIONS=-exhaustive
+            - PRUNE_OPTIONS=-threads 4
             - JOB_RANDOM_DELAY=300
             - HEALTHCHECK_URL=${DUPLICACY_HEALTHCHECK_URL}
         volumes:
