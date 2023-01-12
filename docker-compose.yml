@@ -359,49 +359,17 @@ services:
     # Other
     # ~~~~~
 
-    postgres:
-        image: postgres:13.6
-        volumes:
-            - /mnt/data/postgresql/13/data:/var/lib/postgresql/data
-        restart: always
-
-    pgadmin:
-        image: dpage/pgadmin4:6.8
-        restart: always
-        environment:
-            - TZ=Pacific/Auckland
-            - PGADMIN_DEFAULT_EMAIL=admin@example.com
-            - PGADMIN_DEFAULT_PASSWORD=password
-            - PGADMIN_DISABLE_POSTFIX=True
-        volumes:
-            - /mnt/data/pgadmin:/var/lib/pgadmin
-
-    cloudflare_pgadmin:
-        image: jonoh/cloudflared:2022.12.1
-        restart: always
-        environment:
-            - TZ=Pacific/Auckland
-            - TUNNEL_URL=http://pgadmin:80
-            - ACCOUNT_ID=${CF_ACCOUNT_ID}
-            - TUNNEL_NAME=pgadmin
-            - TUNNEL_ID=${PGADMIN_TUNNEL_ID}
-            - TUNNEL_SECRET=${PGADMIN_TUNNEL_SECRET}
-        volumes:
-            - /mnt/data/cloudflare_pgadmin:/config        
-
     radio_db:
-        image: jonoh/radio_db:0.3.54
+        image: jonoh/radio_db:0.3.57
         container_name: radio_db
         environment:
-            - RDB_DATABASE_HOST=postgres
-            - RDB_DATABASE_NAME=radio_db
-            - RDB_DATABASE_USERNAME=radio_db
-            - RDB_DATABASE_PASSWORD=${RDB_DB_PASSWORD}
+            - RDB_DATABASE_CONNECTION_STRING=${RDB_CONNECTION_STRING}
             - RDB_SPOTIFY_CLIENT_ID=${RDB_SPOTIFY_CLIENT_ID}
             - RDB_SPOTIFY_CLIENT_SECRET=${RDB_SPOTIFY_CLIENT_SECRET}
             - RDB_SPOTIFY_AUTH_SEED=${RDB_SPOTIFY_AUTH_SEED}
         volumes:
             - /mnt/data/radio_db/config.yml:/app/config.yml
+            - /mnt/data/radio_db/root.crt:/root/.postgresql/root.crt
         restart: always
 
     twitterdedupe-redis:
