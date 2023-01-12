@@ -360,7 +360,7 @@ services:
     # ~~~~~
 
     radio_db:
-        image: jonoh/radio_db:0.3.57
+        image: jonoh/radio_db:0.3.58
         container_name: radio_db
         environment:
             - RDB_DATABASE_CONNECTION_STRING=${RDB_CONNECTION_STRING}
