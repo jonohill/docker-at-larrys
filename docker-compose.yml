@@ -480,7 +480,7 @@ services:
             - code
 
     vaultwarden:
-        image: vaultwarden/server:1.26.0
+        image: vaultwarden/server:1.27.0
         restart: always
         volumes:
             - /mnt/data/vaultwarden:/data
