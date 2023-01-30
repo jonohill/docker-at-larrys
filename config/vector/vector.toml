@@ -1,0 +1,12 @@
+[sources.docker]
+type = "docker_logs"
+
+[sinks.loki]
+type = "loki"
+inputs = ["docker"]
+compression = "snappy"
+auth.strategy = "basic"
+endpoint = "${LOKI_ENDPOINT}"
+auth.user = "${LOKI_USER}"
+auth.password = "${LOKI_PASSWORD}"
+labels.container_name = "{{ container_name }}"

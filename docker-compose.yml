@@ -25,6 +25,16 @@ services:
     # Server admin
     # ~~~~~~~~~~~~ 
 
+    vector:
+        image: timberio/vector:0.27.0-debian
+        volumes:
+            - ./config/vector/vector.toml:/etc/vector/vector.toml
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - LOKI_ENDPOINT=${LOKI_ENDPOINT}
+            - LOKI_USER=${LOKI_USER}
+            - LOKI_PASSWORD=${LOKI_PASSWORD}
+
     healthchecks:
         image: ghcr.io/jonohill/nas-healthchecks:6
         restart: always
