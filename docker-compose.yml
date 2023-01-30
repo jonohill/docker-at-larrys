@@ -370,7 +370,7 @@ services:
     # ~~~~~
 
     radio_db:
-        image: ghcr.io/jonohill/radio_db:141
+        image: ghcr.io/jonohill/radio_db:144
         container_name: radio_db
         environment:
             - RDB_DATABASE_CONNECTION_STRING=${RDB_CONNECTION_STRING}
