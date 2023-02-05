@@ -437,3 +437,27 @@ services:
             - TUNNEL_ID=${WEBTOP_TUNNEL_ID}
             - TUNNEL_SECRET=${WEBTOP_TUNNEL_SECRET}
         restart: always
+
+    yt_cast:
+        image: jonoh/yt-cast:0.4.9
+        container_name: yt_cast
+        volumes: 
+            - /tmp/yt_cast:/tmp
+        environment:
+            - ROCKET_ADDRESS=0.0.0.0
+            - ROCKET_BASE_URL=${YT_CAST_BASE_URL}
+            - ROCKET_CHANNEL_WHITELIST=${YT_CAST_CHANNEL_WHITELIST}
+        restart: always
+
+    cloudflare_yt_cast:
+        image: jonoh/cloudflared:2023.1.0
+        volumes:
+            - /mnt/data/cloudflare_yt_cast:/config
+        environment:
+            - TZ=Pacific/Auckland
+            - TUNNEL_URL=http://yt_cast:8000
+            - ACCOUNT_ID=${CF_ACCOUNT_ID}
+            - TUNNEL_NAME=yt-cast
+            - TUNNEL_ID=${YT_CAST_TUNNEL_ID}
+            - TUNNEL_SECRET=${YT_CAST_TUNNEL_SECRET}
+        restart: always
