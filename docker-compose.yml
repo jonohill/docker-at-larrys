@@ -251,7 +251,7 @@ services:
             - PLEX_TOKEN=${PLEX_TOKEN}
 
     filebot:
-        image: jonoh/nas-filebot:v0.0.24
+        image: jonoh/nas-filebot:v0.0.25
         environment:
             - TZ=Pacific/Auckland
             - LANG=C.UTF-8
