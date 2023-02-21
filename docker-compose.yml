@@ -439,7 +439,7 @@ services:
         restart: always
 
     yt_cast:
-        image: jonoh/yt-cast:0.4.9
+        image: jonoh/yt-cast:0.4.12
         container_name: yt_cast
         volumes: 
             - /tmp/yt_cast:/tmp
