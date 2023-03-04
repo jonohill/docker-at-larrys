@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   yt-dlp:
-    image: jauderho/yt-dlp:2023.02.17
+    image: jauderho/yt-dlp:2023.03.03
     volumes:
       - /mnt/data/downloads:/downloads
       - /mnt/data:/mnt/data
