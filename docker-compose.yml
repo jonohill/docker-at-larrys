@@ -189,7 +189,7 @@ services:
     # ~~~~~ 
 
     plex:
-        image: jonoh/nas-plex:v0.0.104
+        image: jonoh/nas-plex:v0.0.106
         container_name: plex
         restart: always
         labels:
@@ -325,7 +325,7 @@ services:
             - nextpvr
 
     nextpvr:
-        image: ghcr.io/jonohill/nas-nextpvr:46
+        image: ghcr.io/jonohill/nas-nextpvr:58
         container_name: nextpvr
         network_mode: "service:vpn_nextpvr"
         restart: always
