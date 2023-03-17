@@ -29,7 +29,7 @@ services:
     # ~~~~~~~~~~~~ 
 
     vector:
-        image: timberio/vector:0.28.0-debian
+        image: timberio/vector:0.28.1-debian
         volumes:
             - ./config/vector/vector.toml:/etc/vector/vector.toml
             - /var/run/docker.sock:/var/run/docker.sock
