@@ -18,6 +18,9 @@ x-images:
     # renovate: versioning=semver
     - &GH_RUNNER_IMAGE ghcr.io/jonohill/gh-runner:v3.4.9
 
+    # renovate: versioning=regex:^release-(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$
+    - &QBT_IMAGE hotio/qbittorrent:release-4.4.5
+
 
 services:
 
@@ -262,7 +265,7 @@ services:
         restart: always
 
     qbittorrent:
-        image: hotio/qbittorrent:release-4.4.5
+        image: *QBT_IMAGE
         container_name: qbittorrent
         labels:
             - autoheal=true        
