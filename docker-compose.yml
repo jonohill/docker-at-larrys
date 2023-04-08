@@ -241,7 +241,7 @@ services:
             - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}     
 
     rclone_move_media:
-        image: ghcr.io/jonohill/rclone-move:32
+        image: ghcr.io/jonohill/rclone-move:38
         restart: always
         volumes:
             - /mnt/data/tmp/plex-media:/source
@@ -352,7 +352,7 @@ services:
             - nextpvr
 
     rclone_move_tv:
-        image: ghcr.io/jonohill/rclone-move:32
+        image: ghcr.io/jonohill/rclone-move:38
         restart: always
         volumes:
             - /mnt/data/tmp/nextpvr/recorded:/source
