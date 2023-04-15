@@ -325,7 +325,7 @@ services:
             - nextpvr
 
     nextpvr:
-        image: ghcr.io/jonohill/nas-nextpvr:60
+        image: ghcr.io/jonohill/nas-nextpvr:62
         container_name: nextpvr
         network_mode: "service:vpn_nextpvr"
         restart: always
