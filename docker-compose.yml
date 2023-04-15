@@ -133,6 +133,19 @@ services:
         networks:
             - backup
 
+    kopia:
+        image: ghcr.io/jonohill/kopia-tailscale:3
+        restart: always
+        environment:
+            - KOPIA_PASSWORD=${KOPIA_PASSWORD}
+            - KOPIA_SERVER_PASSWORD=${KOPIA_SERVER_PASSWORD}
+            - TS_AUTH_KEY=${KOPIA_TS_AUTH_KEY}
+            - TS_HOSTNAME=kopia
+        volumes:
+            - /mnt/data/kopia/config:/config
+            - /mnt/data/kopia/data:/data
+            - /mnt/data:/mnt/data
+
     autoheal:
         image: willfarrell/autoheal:1.2.0
         restart: always
