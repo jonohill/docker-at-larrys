@@ -59,7 +59,7 @@ services:
         command: git pull
 
     cloudflare_compose_up:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         restart: always
         volumes:
             - /mnt/data/cloudflare_compose_up:/config
@@ -82,7 +82,7 @@ services:
         entrypoint: /compose/forever.sh
 
     cloudflare_ssh:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         restart: always
         network_mode: host
         runtime: runc
@@ -183,7 +183,7 @@ services:
             - filerun
 
     filerun_cloudflare:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         restart: always
         volumes:
             - /mnt/data/filerun/cloudflare:/config
@@ -241,7 +241,7 @@ services:
             start_period: 120s
 
     cloudflare_plex:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         restart: always
         volumes:
             - /mnt/data/cloudflare_plex:/config
@@ -304,7 +304,7 @@ services:
             - net.ipv6.conf.all.disable_ipv6=1
 
     cloudflare_qbittorrent:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         restart: always
         volumes:
             - /mnt/data/cloudflare_qbt:/config
@@ -350,7 +350,7 @@ services:
             - /mnt/data/tmp/nextpvr/recorded:/recorded
 
     cloudflare_nextpvr:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         restart: always
         volumes:
             - /mnt/data/cloudflare_nextpvr:/config
@@ -442,7 +442,7 @@ services:
             - seccomp:unconfined               
 
     cloudflare_webtop:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         volumes:
             - /mnt/data/cloudflare_webtop:/config        
         environment:
@@ -466,7 +466,7 @@ services:
         restart: always
 
     cloudflare_yt_cast:
-        image: jonoh/cloudflared:2023.4.2
+        image: jonoh/cloudflared:2023.5.0
         volumes:
             - /mnt/data/cloudflare_yt_cast:/config
         environment:
