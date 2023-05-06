@@ -81,16 +81,16 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         entrypoint: /compose/forever.sh
 
-    cloudflare_ssh:
-        image: jonoh/cloudflared:2023.5.0
+    cloudflare_vnc:
+        image: jonoh/cloudflared:2023.4.0
         restart: always
         network_mode: host
-        runtime: runc
         volumes:
             - /mnt/data/cloudflare_ssh:/config
+        command: --no-tls-verify
         environment:
             - TZ=Pacific/Auckland
-            - TUNNEL_URL=ssh://localhost:22
+            - TUNNEL_URL=https://localhost:8444
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
             - TUNNEL_NAME=larry
             - TUNNEL_ID=${SSH_TUNNEL_ID}
