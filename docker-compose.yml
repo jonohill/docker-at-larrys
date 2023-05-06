@@ -87,7 +87,6 @@ services:
         network_mode: host
         volumes:
             - /mnt/data/cloudflare_vnc:/config
-        command: --no-tls-verify
         environment:
             - TZ=Pacific/Auckland
             - TUNNEL_URL=https://localhost:8444
@@ -95,6 +94,7 @@ services:
             - TUNNEL_NAME=larry
             - TUNNEL_ID=${LARRY_TUNNEL_ID}
             - TUNNEL_SECRET=${LARRY_TUNNEL_SECRET}
+            - NO_TLS_VERIFY=true
 
     rclone_serve_backup:
         image: rclone/rclone:1.62.2
