@@ -93,8 +93,8 @@ services:
             - TUNNEL_URL=https://localhost:8444
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
             - TUNNEL_NAME=larry
-            - TUNNEL_ID=${SSH_TUNNEL_ID}
-            - TUNNEL_SECRET=${SSH_TUNNEL_SECRET}
+            - TUNNEL_ID=${LARRY_TUNNEL_ID}
+            - TUNNEL_SECRET=${LARRY_TUNNEL_SECRET}
 
     rclone_serve_backup:
         image: rclone/rclone:1.62.2
