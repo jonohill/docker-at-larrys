@@ -86,7 +86,7 @@ services:
         restart: always
         network_mode: host
         volumes:
-            - /mnt/data/cloudflare_ssh:/config
+            - /mnt/data/cloudflare_vnc:/config
         command: --no-tls-verify
         environment:
             - TZ=Pacific/Auckland
