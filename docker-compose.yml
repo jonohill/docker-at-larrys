@@ -399,7 +399,7 @@ services:
         restart: always
 
     twitterdedupe-redis:
-        image: redis:6.2.6
+        image: redis:6.2.12
         volumes:
             - /mnt/data/twitterdedupe:/data
         command: redis-server --appendonly yes
