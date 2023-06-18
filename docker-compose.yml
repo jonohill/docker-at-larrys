@@ -398,27 +398,6 @@ services:
             - /etc/ssl/certs/ca-certificates.crt:/root/.postgresql/root.crt
         restart: always
 
-    twitterdedupe-redis:
-        image: redis:6.2.6
-        volumes:
-            - /mnt/data/twitterdedupe:/data
-        command: redis-server --appendonly yes
-        restart: always
-
-    twitterdedupe-verge:
-        image: jonoh/twitter-dedupe:0.7.4
-        environment:
-            - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
-            - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
-            - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
-            - TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET}
-            - REDISTOGO_URL=redis://twitterdedupe-redis:6379
-            - TWITTER_SCREEN_NAME=thevergelite
-            - RETWEET=1
-            - WAIT_INTERVAL=300 # Time to wait between polls, in seconds
-            - LOG_LEVEL=WARN # Or INFO, OR DEBUG, etc.
-        restart: always
-
     webtop:
         image: jonoh/nas-webtop:2023.082.970
         environment:
