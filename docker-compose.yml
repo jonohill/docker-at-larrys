@@ -19,7 +19,7 @@ x-images:
     - &GH_RUNNER_IMAGE ghcr.io/jonohill/gh-runner:v3.4.9
 
     # renovate: versioning=regex:^release-(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$
-    - &QBT_IMAGE hotio/qbittorrent:release-4.5.2
+    - &QBT_IMAGE hotio/qbittorrent:release-4.5.3
 
 
 services:
