@@ -39,7 +39,7 @@ services:
             - LOKI_PASSWORD=${LOKI_PASSWORD}
 
     healthchecks:
-        image: ghcr.io/jonohill/nas-healthchecks:8
+        image: ghcr.io/jonohill/nas-healthchecks:12
         restart: always
         volumes:
             - /mnt/data/healthchecks:/config
