@@ -14,3 +14,11 @@ auth.password = "${LOKI_PASSWORD}"
 
 encoding.codec = "json"
 labels.container_name = "{{ container_name }}"
+
+
+[sinks.axiom]
+type = "axiom"
+inputs = ["docker"]
+dataset = "test"
+token = "${AXIOM_TOKEN}"
+compression = "zstd"
