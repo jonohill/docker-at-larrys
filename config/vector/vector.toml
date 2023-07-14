@@ -21,4 +21,3 @@ type = "axiom"
 inputs = ["docker"]
 dataset = "test"
 token = "${AXIOM_TOKEN}"
-compression = "zlib"
