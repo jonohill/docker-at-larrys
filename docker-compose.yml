@@ -347,6 +347,7 @@ services:
         restart: always
         environment:
             - RECORDED_DIR=/recorded
+            - FFMPEG_INPUT_ARGS=-analyzeduration 100M -probesize 100M
         volumes:
             - /mnt/data/nextpvr:/config
             - /mnt/data/tmp/nextpvr/inprogress:/recordings
