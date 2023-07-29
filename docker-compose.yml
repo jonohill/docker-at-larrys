@@ -100,7 +100,7 @@ services:
             - NO_TLS_VERIFY=true
 
     rclone_serve_backup:
-        image: rclone/rclone:1.63.0
+        image: rclone/rclone:1.63.1
         volumes:
             - /mnt/data/rclone_serve_backup:/config
             - /tmp/caches/rclone_serve_backup:/root/.cache
