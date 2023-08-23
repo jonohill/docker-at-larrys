@@ -268,7 +268,7 @@ services:
             - HTTPPROXY=on
 
     nettopbox:
-        image: ghcr.io/jonohill/nettopbox:0.1.0
+        image: ghcr.io/jonohill/nettopbox:0.1.1
         container_name: nettopbox
         network_mode: "service:vpn_nettopbox"
         restart: always
