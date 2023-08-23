@@ -274,7 +274,8 @@ services:
         restart: always
         environment:
             - NTB_IPTV_URL=https://i.mjh.nz/nz/raw-tv.m3u8
-            - NTB_BASE_URL=http://nettopbox:8080
+            # network is shared with vpn container
+            - NTB_BASE_URL=http://vpn_nettopbox:8080
 
     rclone_move_media:
         image: ghcr.io/jonohill/rclone-move:42
