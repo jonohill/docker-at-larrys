@@ -81,7 +81,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         entrypoint: /compose/forever.sh
 
-    cloudflare_vnc:
+    cloudflare_ssh:
         image: jonoh/cloudflared:2023.7.3
         restart: always
         network_mode: host
@@ -89,12 +89,11 @@ services:
             - /mnt/data/cloudflare_vnc:/config
         environment:
             - TZ=Pacific/Auckland
-            - TUNNEL_URL=https://localhost:8444
+            - TUNNEL_URL=ssh://localhost:22
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
             - TUNNEL_NAME=larry
             - TUNNEL_ID=${LARRY_TUNNEL_ID}
             - TUNNEL_SECRET=${LARRY_TUNNEL_SECRET}
-            - NO_TLS_VERIFY=true
 
     rclone_serve_backup:
         image: rclone/rclone:1.63.1
