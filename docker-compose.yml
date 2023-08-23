@@ -253,6 +253,30 @@ services:
             - TUNNEL_ID=${PLEX_TUNNEL_ID}
             - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}     
 
+    vpn_nettopbox:
+        image: qmcgaw/gluetun:v3.35.0
+        container_name: vpn_nettopbox
+        restart: always
+        cap_add:
+            - NET_ADMIN
+        labels:
+            - autoheal=true
+        environment:
+            - VPNSP=surfshark
+            - OPENVPN_USER=${VPN_USERNAME}
+            - OPENVPN_PASSWORD=${VPN_PASSWORD}
+            - SERVER_HOSTNAME=nz-akl.prod.surfshark.com
+            - HTTPPROXY=on
+
+    nettopbox:
+        image: ghcr.io/jonohill/nettopbox:0.1.0
+        container_name: nettopbox
+        network_mode: "service:vpn_nettopbox"
+        restart: always
+        environment:
+            - NTB_IPTV_URL=https://i.mjh.nz/nz/raw-tv.m3u8
+            - NTB_BASE_URL=http://nettopbox:8080
+
     rclone_move_media:
         image: ghcr.io/jonohill/rclone-move:42
         restart: always
