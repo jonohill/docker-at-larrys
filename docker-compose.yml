@@ -200,7 +200,7 @@ services:
         image: ghcr.io/tailscale/tailscale:v1.48.1
         environment:
             - TS_AUTH_KEY=${TS_NAS_AUTH_KEY}
-            - TS_HOSTNAME=larry_to_nas
+            - TS_HOSTNAME=larrytonas
             - TS_STATE_DIR=/data
             - TS_USERSPACE=true
             - TS_TAILSCALED_EXTRA_ARGS=--outbound-http-proxy-listen=localhost:1055
