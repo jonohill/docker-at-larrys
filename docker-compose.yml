@@ -204,7 +204,7 @@ services:
             - TS_HOSTNAME=larrytonas
             - TS_STATE_DIR=/data
             - TS_USERSPACE=true
-            - TS_TAILSCALED_EXTRA_ARGS=--outbound-http-proxy-listen=localhost:1055
+            - TS_TAILSCALED_EXTRA_ARGS=--outbound-http-proxy-listen=0.0.0.0:1055
             - TS_EXTRA_ARGS=--exit-node=100.116.133.99
         volumes:
             - /mnt/data/tailscale_nas:/data
