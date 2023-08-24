@@ -198,6 +198,7 @@ services:
 
     tailscale_nas:
         image: ghcr.io/tailscale/tailscale:v1.48.1
+        container_name: tailscale_nas
         environment:
             - TS_AUTH_KEY=${TS_NAS_AUTH_KEY}
             - TS_HOSTNAME=larrytonas
