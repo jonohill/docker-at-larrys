@@ -196,6 +196,18 @@ services:
         networks:
             - filerun
 
+    tailscale_nas:
+        image: ghcr.io/tailscale/tailscale:v1.48.1
+        environment:
+            - TS_AUTH_KEY=${TS_NAS_AUTH_KEY}
+            - TS_HOSTNAME=larry_to_nas
+            - TS_STATE_DIR=/data
+            - TS_USERSPACE=true
+            - TS_TAILSCALED_EXTRA_ARGS=--outbound-http-proxy-listen=localhost:1055
+            - TS_EXTRA_ARGS=--exit-node=100.116.133.99
+        volumes:
+            - /mnt/data/tailscale_nas:/data
+
     # ~~~~~
     # Media
     # ~~~~~ 
@@ -250,32 +262,16 @@ services:
             - ACCOUNT_ID=${CF_ACCOUNT_ID}
             - TUNNEL_NAME=plex
             - TUNNEL_ID=${PLEX_TUNNEL_ID}
-            - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}     
-
-    vpn_nettopbox:
-        image: qmcgaw/gluetun:v3.35.0
-        container_name: vpn_nettopbox
-        restart: always
-        cap_add:
-            - NET_ADMIN
-        labels:
-            - autoheal=true
-        environment:
-            - VPNSP=surfshark
-            - OPENVPN_USER=${VPN_USERNAME}
-            - OPENVPN_PASSWORD=${VPN_PASSWORD}
-            - SERVER_HOSTNAME=nz-akl.prod.surfshark.com
-            - HTTPPROXY=on
+            - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}
 
     nettopbox:
         image: ghcr.io/jonohill/nettopbox:0.1.1
         container_name: nettopbox
-        network_mode: "service:vpn_nettopbox"
         restart: always
         environment:
             - NTB_IPTV_URL=https://i.mjh.nz/nz/raw-tv.m3u8
             # network is shared with vpn container
-            - NTB_BASE_URL=http://vpn_nettopbox:8080
+            - NTB_BASE_URL=http://nettopbox:8080
 
     rclone_move_media:
         image: ghcr.io/jonohill/rclone-move:42
