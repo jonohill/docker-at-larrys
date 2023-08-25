@@ -196,19 +196,6 @@ services:
         networks:
             - filerun
 
-    tailscale_nas:
-        image: ghcr.io/tailscale/tailscale:v1.48.1
-        container_name: tailscale_nas
-        environment:
-            - TS_AUTH_KEY=${TS_NAS_AUTH_KEY}
-            - TS_HOSTNAME=larrytonas
-            - TS_STATE_DIR=/data
-            - TS_USERSPACE=true
-            - TS_TAILSCALED_EXTRA_ARGS=--outbound-http-proxy-listen=0.0.0.0:1055
-            - TS_EXTRA_ARGS=--exit-node=100.116.133.99
-        volumes:
-            - /mnt/data/tailscale_nas:/data
-
     # ~~~~~
     # Media
     # ~~~~~ 
@@ -265,14 +252,26 @@ services:
             - TUNNEL_ID=${PLEX_TUNNEL_ID}
             - TUNNEL_SECRET=${PLEX_TUNNEL_SECRET}
 
+    vpn_nettopbox:
+        image: ghcr.io/tailscale/tailscale:v1.48.1
+        container_name: vpn_nettopbox
+        environment:
+            - TS_AUTH_KEY=${TS_NAS_AUTH_KEY}
+            - TS_HOSTNAME=larrytonas
+            - TS_STATE_DIR=/data
+        volumes:
+            - /mnt/data/tailscale_nas:/data            
+
     nettopbox:
-        image: ghcr.io/jonohill/nettopbox:0.1.1
+        image: ghcr.io/jonohill/nettopbox:0.2.0
         container_name: nettopbox
+        network_mode: "service:vpn_nettopbox"
         restart: always
         environment:
             - NTB_IPTV_URL=https://i.mjh.nz/nz/raw-tv.m3u8
             # network is shared with vpn container
-            - NTB_BASE_URL=http://nettopbox:8080
+            - NTB_BASE_URL=http://vpn_nettopbox:8080
+            - https_proxy=http://100.116.133.99:3128
 
     rclone_move_media:
         image: ghcr.io/jonohill/rclone-move:42
