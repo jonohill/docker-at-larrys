@@ -110,7 +110,7 @@ services:
             - backup
 
     duplicacy:
-        image: ghcr.io/jonohill/nas-duplicacy:5
+        image: ghcr.io/jonohill/nas-duplicacy:24
         environment:
             - RUN_JOB_IMMEDIATELY=yes
             - SNAPSHOT_ID=larry
