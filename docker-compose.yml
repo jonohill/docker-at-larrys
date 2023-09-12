@@ -133,7 +133,7 @@ services:
             - backup
 
     kopia:
-        image: ghcr.io/jonohill/kopia-tailscale:3
+        image: ghcr.io/jonohill/kopia-tailscale:24
         restart: always
         environment:
             - KOPIA_PASSWORD=${KOPIA_PASSWORD}
