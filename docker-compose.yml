@@ -261,6 +261,14 @@ services:
             - NTB_BASE_URL=http://nettopbox:8080
             - https_proxy=http://100.116.133.99:3128
 
+    nettopbox_au:
+        image: ghcr.io/jonohill/nettopbox:0.2.0
+        container_name: nettopbox
+        restart: always
+        environment:
+            - NTB_IPTV_URL=https://i.mjh.nz/au/Sydney/raw-tv.m3u8
+            - NTB_BASE_URL=http://nettopbox_au:8080
+
     rclone_move_media:
         image: ghcr.io/jonohill/rclone-move:42
         restart: always
