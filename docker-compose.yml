@@ -201,7 +201,7 @@ services:
     # ~~~~~ 
 
     plex:
-        image: jonoh/nas-plex:v0.0.119
+        image: jonoh/nas-plex:v0.0.126
         container_name: plex
         restart: always
         labels:
