@@ -263,7 +263,7 @@ services:
 
     nettopbox_au:
         image: ghcr.io/jonohill/nettopbox:0.2.0
-        container_name: nettopbox
+        container_name: nettopbox_au
         restart: always
         environment:
             - NTB_IPTV_URL=https://i.mjh.nz/au/Sydney/raw-tv.m3u8
