@@ -26,7 +26,7 @@ services:
     # ~~~~~~~~~~~~ 
 
     vector:
-        image: timberio/vector:0.31.0-debian
+        image: timberio/vector:0.32.2-debian
         container_name: vector
         restart: always
         volumes:
