@@ -39,7 +39,7 @@ services:
             - AXIOM_TOKEN=${AXIOM_TOKEN}
 
     healthchecks:
-        image: ghcr.io/jonohill/nas-healthchecks:14
+        image: ghcr.io/jonohill/nas-healthchecks:32
         restart: always
         volumes:
             - /mnt/data/healthchecks:/config
