@@ -230,6 +230,7 @@ services:
             - /tmp/plex-transcode:/transcode
             - /tmp:/tmp
             - /tmp/caches/plex:/caches/rclone_plex
+            - /mnt/data/downloads:/downloads
         cap_add:
             - SYS_ADMIN
         devices:
