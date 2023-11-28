@@ -96,7 +96,7 @@ services:
             - TUNNEL_SECRET=${LARRY_TUNNEL_SECRET}
 
     rclone_serve_backup:
-        image: rclone/rclone:1.64.2
+        image: rclone/rclone:1.65.0
         volumes:
             - /mnt/data/rclone_serve_backup:/config
             - /tmp/caches/rclone_serve_backup:/root/.cache
