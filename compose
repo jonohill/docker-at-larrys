@@ -2,4 +2,4 @@
 
 set -e
 
-SOPS_AGE_KEY_FILE=key.txt sops exec-env secrets.enc.env "docker-compose $(printf '%q ' "$@")"
+SOPS_AGE_KEY_FILE=key.txt sops exec-env secrets.enc.env "docker compose $(printf '%q ' "$@")"
