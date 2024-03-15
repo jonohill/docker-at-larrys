@@ -404,19 +404,6 @@ services:
     # Other
     # ~~~~~
 
-    radio_db:
-        image: ghcr.io/jonohill/radio_db:158
-        container_name: radio_db
-        environment:
-            - RDB_DATABASE_CONNECTION_STRING=${RDB_CONNECTION_STRING}
-            - RDB_SPOTIFY_CLIENT_ID=${RDB_SPOTIFY_CLIENT_ID}
-            - RDB_SPOTIFY_CLIENT_SECRET=${RDB_SPOTIFY_CLIENT_SECRET}
-            - RDB_SPOTIFY_AUTH_SEED=${RDB_SPOTIFY_AUTH_SEED}
-        volumes:
-            - /mnt/data/radio_db/config.yml:/app/config.yml
-            - /etc/ssl/certs/ca-certificates.crt:/root/.postgresql/root.crt
-        restart: always
-
     webtop:
         image: jonoh/nas-webtop:2023.330.1380
         environment:
