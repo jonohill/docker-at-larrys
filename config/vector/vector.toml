@@ -1,23 +1,8 @@
 [sources.docker]
 type = "docker_logs"
 
-
-[sinks.loki]
-type = "loki"
-inputs = ["docker"]
-compression = "snappy"
-endpoint = "${LOKI_ENDPOINT}"
-
-auth.strategy = "basic"
-auth.user = "${LOKI_USER}"
-auth.password = "${LOKI_PASSWORD}"
-
-encoding.codec = "json"
-labels.container_name = "{{ container_name }}"
-
-
 [sinks.axiom]
 type = "axiom"
 inputs = ["docker"]
-dataset = "test"
+dataset = "logs"
 token = "${AXIOM_TOKEN}"
