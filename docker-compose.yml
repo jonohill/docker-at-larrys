@@ -37,6 +37,7 @@ services:
             - LOKI_USER=${LOKI_USER}
             - LOKI_PASSWORD=${LOKI_PASSWORD}
             - AXIOM_TOKEN=${AXIOM_TOKEN}
+        command: -c /etc/vector/vector.toml
 
     healthchecks:
         image: ghcr.io/jonohill/nas-healthchecks:38
