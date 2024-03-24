@@ -215,10 +215,6 @@ services:
             - RCLONE_MOUNT_CACHE_DIR=/caches/rclone_plex
             - RCLONE_MOUNT_TARGET=/data/plex-media
             - RCLONE_CACHE_MAX_SIZE=25G
-            - RCLONE_CONFIG_2=/config/rclone2.conf
-            - RCLONE_MOUNT_DIR_2=od_recordings:/
-            - RCLONE_MOUNT_CACHE_DIR_2=/caches/rclone_plex_od
-            - RCLONE_MOUNT_TARGET_2=/data/recordings
             # Antennas
             - ANTENNAS_URL=http://localhost:5004
             - TVHEADEND_URL=http://vpn_tvheadend:9981
