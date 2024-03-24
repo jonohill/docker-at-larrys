@@ -272,7 +272,7 @@ services:
             - NTB_BASE_URL=http://nettopbox_au:8080
 
     rclone_move_media:
-        image: ghcr.io/jonohill/rclone-move:62
+        image: ghcr.io/jonohill/rclone-move:68
         restart: always
         volumes:
             - /mnt/data/tmp/plex-media:/source
