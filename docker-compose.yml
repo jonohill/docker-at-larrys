@@ -50,7 +50,7 @@ services:
             - DF_FILESYSTEMS=/dev/sda1,/dev/sdb1
 
     compose_up:
-        image: jonoh/compose-up:v0.0.10
+        image: jonoh/compose-up:v0.0.28
         restart: always
         environment:
             - DOCKER_HOST=unix:///var/run/docker.sock
@@ -73,7 +73,7 @@ services:
             - TUNNEL_SECRET=${COMPOSE_UP_TUNNEL_SECRET}
 
     compose_forever:
-        image: jonoh/compose-up:v0.0.10
+        image: jonoh/compose-up:v0.0.28
         restart: always
         environment:
             - DOCKER_HOST=unix:///var/run/docker.sock
