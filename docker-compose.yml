@@ -339,7 +339,7 @@ services:
     # ~~~~~
 
     webtop:
-        image: jonoh/nas-webtop:2023.330.1380
+        image: jonoh/nas-webtop:2024.070.1039
         environment:
             - PUID=1000
             - PGID=1000
