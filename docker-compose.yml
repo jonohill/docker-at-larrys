@@ -202,7 +202,7 @@ services:
     # ~~~~~ 
 
     plex:
-        image: ghcr.io/hillnz/docker-nas-plex:224
+        image: ghcr.io/hillnz/docker-nas-plex:226
         container_name: plex
         restart: always
         labels:
