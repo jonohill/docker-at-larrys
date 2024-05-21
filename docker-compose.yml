@@ -292,7 +292,7 @@ services:
         restart: always
 
     qbittorrent:
-        image: ghcr.io/jonohill/nas-qbt:34
+        image: ghcr.io/jonohill/nas-qbt:43
         container_name: qbittorrent
         labels:
             - autoheal=true        
