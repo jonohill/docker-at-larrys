@@ -40,7 +40,7 @@ services:
         command: -c /etc/vector/vector.toml
 
     healthchecks:
-        image: ghcr.io/jonohill/nas-healthchecks:38
+        image: ghcr.io/jonohill/nas-healthchecks:47
         restart: always
         volumes:
             - /mnt/data/healthchecks:/config
