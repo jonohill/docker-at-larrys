@@ -172,7 +172,7 @@ services:
             - filerun
 
     filerun_db:
-        image: mariadb:11.3.2
+        image: mariadb:11.4.2
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: password
