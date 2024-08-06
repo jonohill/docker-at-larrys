@@ -224,7 +224,7 @@ services:
             - 32400:32400
         volumes:
             - /mnt/data/plex:/config
-            - /tmp/plex-transcode:/transcode
+            - /mnt/data/tmp/plex-transcode:/transcode
             - /tmp:/tmp
             - /tmp/caches/plex:/mnt/tmp/caches/rclone_plex
             - /mnt/data/downloads:/downloads
