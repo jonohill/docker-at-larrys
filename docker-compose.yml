@@ -60,7 +60,7 @@ services:
         command: git pull
 
     cloudflare_compose_up:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         restart: always
         volumes:
             - /mnt/data/cloudflare_compose_up:/config
@@ -83,7 +83,7 @@ services:
         entrypoint: /compose/forever.sh
 
     cloudflare_ssh:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         restart: always
         network_mode: host
         volumes:
@@ -183,7 +183,7 @@ services:
             - filerun
 
     filerun_cloudflare:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         restart: always
         volumes:
             - /mnt/data/filerun/cloudflare:/config
@@ -238,7 +238,7 @@ services:
             start_period: 120s
 
     cloudflare_plex:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         restart: always
         volumes:
             - /mnt/data/cloudflare_plex:/config
@@ -318,7 +318,7 @@ services:
             - net.ipv6.conf.all.disable_ipv6=0
 
     cloudflare_qbittorrent:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         restart: always
         volumes:
             - /mnt/data/cloudflare_qbt:/config
@@ -357,7 +357,7 @@ services:
             - seccomp:unconfined               
 
     cloudflare_webtop:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         volumes:
             - /mnt/data/cloudflare_webtop:/config        
         environment:
@@ -381,7 +381,7 @@ services:
         restart: always
 
     cloudflare_yt_cast:
-        image: jonoh/cloudflared:2024.6.1
+        image: jonoh/cloudflared:2024.8.2
         volumes:
             - /mnt/data/cloudflare_yt_cast:/config
         environment:
